@@ -2,7 +2,7 @@ name: integration
 
 on:
  push:
-  branches: ['main']
+  branches: ['workflows/integration']
 
 jobs:
   build:
@@ -24,3 +24,23 @@ jobs:
       run: npm install
     - name: making build
       run: npm run build
+
+  tests:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x, 22.x]
+       
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: installing depend
+      run: npm install
+    - name: running test
+      run: npm run test
