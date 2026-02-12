@@ -4,7 +4,6 @@ on:
  push:
   branches: ['main']
 
-
 jobs:
   build:
 
@@ -12,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [20.x, 22.x]
        
 
     steps:
@@ -21,7 +20,6 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
     - name: installing depend
       run: npm install
     - name: making build
